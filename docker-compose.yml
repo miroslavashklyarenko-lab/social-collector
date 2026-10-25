@@ -1,0 +1,9 @@
+services:
+  collector:
+    build: .
+    env_file: .env
+    volumes:
+      - ./data:/app/data
+    # кожні 15 хв: нові пости + потроху історії, дашборд оновлюється в data/dashboard.html
+    command: ["loop", "--interval", "900", "--backfill"]
+    restart: unless-stopped
